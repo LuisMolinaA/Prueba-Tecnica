@@ -63,6 +63,13 @@ export class UserService {
         if (!users) {
             return new HttpException("usuarios no encontrados", HttpStatus.NOT_FOUND)
         }
+        if (user.password){
+            const { password } = user;
+            const plainToHash = await hash(password, 10)
+    
+            user = { ...user, password: plainToHash }
+        }
+        
         return this.userRespository.update({ id }, user)
     }
 
