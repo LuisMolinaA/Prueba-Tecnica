@@ -13,9 +13,6 @@ export class User {
     @Column()
     password: string;
 
-    @Column({nullable: true})
-    authStrategy: String;
-
     @OneToMany(() => Task, task => task.createdBy)
     tasks: Task[];
 }
